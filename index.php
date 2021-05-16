@@ -3,6 +3,8 @@
 
     //Recebe todos os dados do Formulário em um array $post
     $post = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+
+    $select = $conn->query("SELECT * FROM cadastro");
     
     //Se não está vazio o campo nome
     // Valida se tem dados no campo nome. Aceita os outros
@@ -61,6 +63,20 @@
         <th>E-mail</th>
         <th>Fone</th>
     </tr>
+    
+        <?php
+        //A função mysqli_fetch_assoc() é usada para retornar uma matriz associativa representando a próxima linha no conjunto de resultados 
+        //representado pelo parâmetro result, aonde cada chave representa o nome de uma coluna do conjunto de resultados.
+        //Em outras palavras, retorna cada linha da busca no Banco de Dados.
+           while($linhas = $select->fetch_assoc()){  
+        ?>
+    <tr>
+            <td><?=$linhas['id'] ?></td>
+            <td><?=$linhas['nome'] ?></td>
+            <td><?=$linhas['email'] ?></td>
+            <td><?=$linhas['fone'] ?></td>
+    </tr>
+    <?php } ?>
 </table>
     
 </body>
